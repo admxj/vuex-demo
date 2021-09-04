@@ -1,17 +1,30 @@
 # vue-demo
 
-## Install Dependency 
+## Install Dependency
+
 ```
 yarn add vuex
 ```
 
 ### Register vuex
+
 ```
 import Vuex from 'vuex'
 Vue.use(Vuex)
 ```
 
+### Add Code Block To main.js
+
+```
+import store from './store'
+new Vue({
+  render: h => h(App),
+  store
+}).$mount('#app')
+```
+
 ### Create Vuex.Store
+
 ```
 import state from './state'
 import * as getters from './getters'
@@ -30,6 +43,7 @@ export default new Vuex.Store({
 ### Create `state` `getters` `mutations` `actions`
 
 * state
+
 ```
 let state = {
     cartList: []
@@ -38,6 +52,7 @@ export default state
 ```
 
 * getters
+
 ```
 export const cartList = function (state) {
     return state.cartList
@@ -45,6 +60,7 @@ export const cartList = function (state) {
 ```
 
 * mutations
+
 ```
 import * as types from './mutation-type'
 
@@ -58,6 +74,7 @@ export default mutations;
 ```
 
 * actions
+
 ```
 import * as types from './mutation-type'
 
@@ -67,4 +84,5 @@ export const deleteProductToCard = ({commit}, product) => {
 ```
 
 ### Customize configuration
+
 See [Configuration Reference](https://vuex.vuejs.org/zh/).
