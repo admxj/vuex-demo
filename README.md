@@ -1,24 +1,70 @@
 # vue-demo
 
-## Project setup
+## Install Dependency 
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+yarn add vuex
 ```
 
-### Compiles and minifies for production
+### Register vuex
 ```
-yarn build
+import Vuex from 'vuex'
+Vue.use(Vuex)
 ```
 
-### Lints and fixes files
+### Create Vuex.Store
 ```
-yarn lint
+import state from './state'
+import * as getters from './getters'
+import mutations from './mutations'
+import * as actions from './actions'
+
+export default new Vuex.Store({
+    state,
+    getters,
+    mutations,
+    actions
+})
+
+```
+
+### Create `state` `getters` `mutations` `actions`
+
+* state
+```
+let state = {
+    cartList: []
+}
+export default state
+```
+
+* getters
+```
+export const cartList = function (state) {
+    return state.cartList
+};
+```
+
+* mutations
+```
+import * as types from './mutation-type'
+
+const mutations = {
+    [types.DECREMENT_PRODUCT_TO_CARD](state, product) {
+        const cartItem = state.cartList.find(item => item.id === product.id);
+        cartItem.quantity--;
+    }
+}
+export default mutations;
+```
+
+* actions
+```
+import * as types from './mutation-type'
+
+export const deleteProductToCard = ({commit}, product) => {
+    commit(types.DELETE_PRODUCT_TO_CARD, product);
+};
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [Configuration Reference](https://vuex.vuejs.org/zh/).
